@@ -10,10 +10,8 @@ use LdapRecord\Models\ActiveDirectory\User;
 
 class EmployeeController extends Controller
 {
-    public $employee_id;
     public function index($id)
     {
-        $this->employee_id = $id;
         $employees = Employee::find($id);
         $portals = Portal::where('status','t')->get();
         return view('employee.assign-portals',compact('employees','portals'));
@@ -23,6 +21,8 @@ class EmployeeController extends Controller
     {
 
         $portal = $request->input('portals');
+        $str = implode(',',$portal);
+        $info = explode(',',$str);
 
             Http::fake([
                 '*' => Http::response($portal,200),
@@ -31,7 +31,9 @@ class EmployeeController extends Controller
             $response = Http::post('*', [
                 'portal' => $portal,
             ]);
-        return $response;
+
+
+        return view('employee.assign-portals',['response' => $response,'info' => $info]);
 
 
 //        return redirect()->route('employee.index',$id); https://portal.example.com/api/v1/employees/{id}/portals/

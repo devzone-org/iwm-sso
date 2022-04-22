@@ -22,10 +22,18 @@
                         <td>{{$employees->user_name}}</td>
                     </tr>
                 </table>
-                <form action="{{url('employees/assign-portal/'.$employees->id.'/portals')}}" method="get">
+
+                @php
+                    $base_url = '';
+                    if (!empty($info)){
+                        $base_url = $info[0];
+                    }
+                @endphp
+
+                <form action="{{url( $base_url. '/sso/users')}}" method="get">
                     @foreach($portals as $portal)
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="{{$portal->base_url}}" name="portals[]"
+                            <input class="form-check-input" type="checkbox" value="{{$portal->base_url.','.$employees->name.','.$employees->id.','.$employees->email.','.$employees->user_name.','.$employees->status}}" name="portals[]"
                                    id="portal{{$portal->id}}">
                             <label class="form-check-label" for="portal{{$portal->id}}">
                                 {{$portal->name}}

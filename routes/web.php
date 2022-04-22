@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('employees/assign-portal/{id}', [\App\Http\Controllers\EmployeeController::class, 'index']);
-Route::get('employees/assign-portal/{id}/portals', [\App\Http\Controllers\EmployeeController::class, 'assignPortal']);
+Route::get('{url}/sso/users', [\App\Http\Controllers\EmployeeController::class, 'assignPortal']);
+
 
 Route::get('employees', function () {
     return view('employee.index');
