@@ -32,8 +32,7 @@ class EmployeeController extends Controller
                 'portal' => $portal,
             ]);
 
-
-        return view('employee.assign-portals',['response' => $response,'info' => $info]);
+            return $response;
 
 
 //        return redirect()->route('employee.index',$id); https://portal.example.com/api/v1/employees/{id}/portals/

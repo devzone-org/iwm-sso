@@ -30,7 +30,7 @@
                     }
                 @endphp
 
-                <form action="{{url( $base_url. '/sso/users')}}" method="get">
+                <form action="{{url('/sso/users')}}" method="get">
                     @foreach($portals as $portal)
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="{{$portal->base_url.','.$employees->name.','.$employees->id.','.$employees->email.','.$employees->user_name.','.$employees->status}}" name="portals[]"
