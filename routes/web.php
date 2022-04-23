@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use LdapRecord\Models\ActiveDirectory\User;
+use App\Models\Employee;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +21,21 @@ Route::get('/', function () {
 
 Route::get('employees/assign-portal/{id}', [\App\Http\Controllers\EmployeeController::class, 'index']);
 Route::get('{url}/sso/users', [\App\Http\Controllers\EmployeeController::class, 'assignPortal']);
-
+Route::get('fetch/employees',function(){
+    $users = User::get();
+    foreach($users->toArray() as $u){
+        Employee::updateOrCreate([
+            'user_name' => $u['samaccountname'][0]
+        ],[
+            'comman_name'=>$u['cn'][0],
+            'display_name'=>$u['displayname'][0],
+            'title'=>$u['title'][0],
+            'mobile'=>$u['mobile'][0],
+            'address'=>$u['physicaldeliveryofficename'][0],
+            'email'=>$u['mail'][0]
+        ]);
+    }
+});
 
 Route::get('employees', function () {
     return view('employee.index');

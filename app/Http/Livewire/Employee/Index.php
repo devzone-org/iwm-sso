@@ -16,7 +16,7 @@ class Index extends Component
     public function render()
     {
         $employees = Employee::when(!empty($this->filters['name']), function ($query) {
-            return $query->where('name', 'like', '%' . $this->filters['name'] . '%');
+            return $query->where('comman_name', 'like', '%' . $this->filters['name'] . '%');
         })
         ->when(!empty($this->filters['email']), function ($query) {
                 return $query->where('email', 'like', '%' . $this->filters['email'] . '%');
