@@ -24,17 +24,30 @@ Route::get('{url}/sso/users', [\App\Http\Controllers\EmployeeController::class, 
 Route::get('fetch/employees',function(){
     $users = User::get();
     foreach($users->toArray() as $u){
+        if($u['samaccountname'][0] == 'Muhammad.Jawad'){
+        dd($u);
+     //   dd($u['useraccountcontrol'][0]);
+        }
+        $status = 't';
+        if(!empty($u['useraccountcontrol'])){
+            
+            if($u['useraccountcontrol'][0]=='514' || $u['useraccountcontrol'][0]=='66050'|| $u['useraccountcontrol'][0]=='66082'){
+                    $status = 'f';
+            }
+        }
         Employee::updateOrCreate([
             'user_name' => $u['samaccountname'][0]
         ],[
-            'comman_name'=>$u['cn'][0],
-            'display_name'=>$u['displayname'][0],
-            'title'=>$u['title'][0],
-            'mobile'=>$u['mobile'][0],
-            'address'=>$u['physicaldeliveryofficename'][0],
-            'email'=>$u['mail'][0]
+            'comman_name'=>$u['cn'][0] ?? null,
+            'display_name'=>$u['displayname'][0] ?? null,
+            'title'=>$u['title'][0] ?? null,
+            'mobile'=>$u['mobile'][0] ?? null,
+            'address'=>$u['physicaldeliveryofficename'][0] ?? null,
+            'email'=>$u['mail'][0] ?? null,
+            'status' => $status
         ]);
     }
+    //return redirect('employees');
 });
 
 Route::get('employees', function () {

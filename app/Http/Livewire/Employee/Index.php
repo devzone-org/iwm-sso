@@ -16,7 +16,7 @@ class Index extends Component
     public function render()
     {
         $employees = Employee::when(!empty($this->filters['name']), function ($query) {
-            return $query->where('comman_name', 'like', '%' . $this->filters['name'] . '%');
+            return $query->where('display_name', 'like', '%' . $this->filters['name'] . '%');
         })
         ->when(!empty($this->filters['email']), function ($query) {
                 return $query->where('email', 'like', '%' . $this->filters['email'] . '%');
@@ -27,7 +27,7 @@ class Index extends Component
         ->when(!empty($this->filters['status']), function ($query) {
                 return $query->where('status', $this->filters['status']);
             })
-        ->paginate(10);
+        ->paginate(100);
         return view('livewire.employee.index',[
             'employees' => $employees
         ]);

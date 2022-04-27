@@ -81,7 +81,7 @@
     </nav>
 
     <main class="py-4">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2">
                     <div class="card mb-4">

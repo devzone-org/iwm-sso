@@ -28,11 +28,15 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Display name</th>
+           
             <th scope="col">Email</th>
             <th scope="col">Username</th>
+            <th scope="col">Title</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Address</th>
             <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -41,9 +45,13 @@
             @foreach($employees as $key => $employee)
                 <tr>
                     <th scope="row" style="font-weight: normal">{{$loop->index+1}}</th>
-                    <td>{{$employee->name}}</td>
-                    <th style="font-weight: normal">{{$employee->email}}</th>
+                    <td>{{$employee->display_name}}</td>
+                  
+                    <td>{{$employee->email}}</td>
                     <td>{{$employee->user_name}}</td>
+                    <td>{{$employee->title}}</td>
+                    <td>{{$employee->mobile}}</td>
+                    <td>{{$employee->address}}</td>
                     <th>@if($employee->status == 't')
                             <span class="badge badge-success">Active</span>
                         @else
