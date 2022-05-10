@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
-use LdapRecord\Models\ActiveDirectory\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,30 +19,8 @@ Route::get('/', function () {
 
 Route::get('employees/assign-portal/{id}', [\App\Http\Controllers\EmployeeController::class, 'index']);
 Route::get('/sso/users', [\App\Http\Controllers\EmployeeController::class, 'assignPortal']);
-Route::get('fetch/employees', function () {
-    $users = User::get();
-    foreach ($users->toArray() as $u) {
-
-        $status = 't';
-        if (!empty($u['useraccountcontrol'])) {
-            if ($u['useraccountcontrol'][0] == '514' || $u['useraccountcontrol'][0] == '66050' || $u['useraccountcontrol'][0] == '66082') {
-                $status = 'f';
-            }
-        }
-        Employee::updateOrCreate([
-            'user_name' => $u['samaccountname'][0]
-        ], [
-            'comman_name' => $u['cn'][0] ?? null,
-            'display_name' => $u['displayname'][0] ?? null,
-            'title' => $u['title'][0] ?? null,
-            'mobile' => $u['mobile'][0] ?? null,
-            'address' => $u['physicaldeliveryofficename'][0] ?? null,
-            'email' => $u['mail'][0] ?? null,
-            'status' => $status
-        ]);
-    }
-    return redirect('employees');
-});
+Route::get('fetch/employees', [\App\Http\Controllers\EmployeeController::class, 'fetchEmployee']);
+Route::get('export/employees', [\App\Http\Controllers\EmployeeController::class, 'exportEmployee']);
 
 Route::get('employees', function () {
     return view('employee.index');
