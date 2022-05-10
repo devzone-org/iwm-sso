@@ -13,5 +13,5 @@
     </a>
     <a class="list-group-item list-group-item-action" href="{{ url('export/employees') }}">Export DC Users</a>
 
-    <a href="{{ url('fetch/employees') }}">Fetch DC Users</a>
+    <a class="list-group-item list-group-item-action" href="{{ url('fetch/employees') }}">Fetch DC Users</a>
 </div>
