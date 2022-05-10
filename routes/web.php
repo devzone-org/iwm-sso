@@ -20,12 +20,12 @@ Route::get('/', function () {
 });
 
 Route::get('employees/assign-portal/{id}', [\App\Http\Controllers\EmployeeController::class, 'index']);
-Route::get('{url}/sso/users', [\App\Http\Controllers\EmployeeController::class, 'assignPortal']);
+Route::get('/sso/users', [\App\Http\Controllers\EmployeeController::class, 'assignPortal']);
 Route::get('fetch/employees',function(){
     $users = User::get();
     foreach($users->toArray() as $u){
         if($u['samaccountname'][0] == 'Muhammad.Jawad'){
-        dd($u);
+       // dd($u);
      //   dd($u['useraccountcontrol'][0]);
         }
         $status = 't';
@@ -47,7 +47,7 @@ Route::get('fetch/employees',function(){
             'status' => $status
         ]);
     }
-    //return redirect('employees');
+    return redirect('employees');
 });
 
 Route::get('employees', function () {

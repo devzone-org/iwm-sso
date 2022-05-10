@@ -12,30 +12,11 @@ class EmployeeController extends Controller
 {
     public function index($id)
     {
-        $employees = Employee::find($id);
-        $portals = Portal::where('status','t')->get();
-        return view('employee.assign-portals',compact('employees','portals'));
+        
+        
+        return view('employee.assign-portals',compact('id'));
     }
 
-    public function assignPortal(Request $request)
-    {
-
-        $portal = $request->input('portals');
-        $str = implode(',',$portal);
-        $info = explode(',',$str);
-
-            Http::fake([
-                '*' => Http::response($portal,200),
-            ]);
-
-            $response = Http::post('*', [
-                'portal' => $portal,
-            ]);
-
-            return $response;
-
-
-//        return redirect()->route('employee.index',$id); https://portal.example.com/api/v1/employees/{id}/portals/
-    }
+    
 
 }

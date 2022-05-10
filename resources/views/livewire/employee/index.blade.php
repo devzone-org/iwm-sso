@@ -58,7 +58,7 @@
                             <span class="badge badge-danger">InActive</span>
                         @endif
                     </th>
-                    <td><a href="{{url('employees/assign-portal/'.$employee->id)}}">Assign</td>
+                    <td><a href="{{url('employees/assign-portal/'.$employee->id)}}">Manage</td>
                 </tr>
             @endforeach
 
