@@ -7,9 +7,9 @@
             <div class="card-header">{{ __('Employee Details') }}
 
             </div>
-             
 
-@livewire('manage-employee-portals',['employee_id'=>$id])
+
+            @livewire('manage-employee-portals',['employee_id'=>$id])
 
         </div>
     </div>

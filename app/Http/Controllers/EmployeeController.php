@@ -12,11 +12,9 @@ class EmployeeController extends Controller
 {
     public function index($id)
     {
-        
-        
         return view('employee.assign-portals',compact('id'));
     }
 
-    
+
 
 }
