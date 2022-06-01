@@ -61,9 +61,9 @@
               </div>
               <div>
                 <h3 class="text-sm font-medium text-gray-900">
-                  <a href="#" class="focus:outline-none">
+                  <a href="http://192.168.1.40:82" class="focus:outline-none">
                     <span class="absolute inset-0" aria-hidden="true"></span>
-                    Task Management<span aria-hidden="true"> &rarr;</span>
+                    Task Management System<span aria-hidden="true"> &rarr;</span>
                   </a>
                 </h3>
                 
