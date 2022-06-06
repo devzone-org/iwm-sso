@@ -16,6 +16,14 @@ class EmployeeController extends Controller
     public function fetchEmployee()
     {
         $users = User::get();
+
+        $employees = Employee::get();
+
+
+        \App\Models\Employee::where('id','>','0')->update([
+            'verify' => 'f']);
+
+
         foreach ($users->toArray() as $u) {
 
             $status = 't';
@@ -33,7 +41,8 @@ class EmployeeController extends Controller
                 'mobile' => $u['mobile'][0] ?? null,
                 'address' => $u['physicaldeliveryofficename'][0] ?? null,
                 'email' => $u['mail'][0] ?? null,
-                'status' => $status
+                'status' => $status,
+                'verify' => 't'
             ]);
         }
         return redirect('employees');
