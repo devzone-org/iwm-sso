@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,3 +43,12 @@ Route::get('portals/edit/{id}', function () {
 Auth::routes(['register' => false]);
 
 //Route::get('/employees', [App\Http\Controllers\HomeController::class, 'index'])->name('employee.index');
+
+
+Route::get('send-mail', function () {
+
+
+    $res = Mail::to('talha8018@gmail.com')->send(new OrderShipped());
+    dd($res);
+
+});
