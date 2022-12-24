@@ -203,7 +203,7 @@
                 </a>
             </div>
             <div class="w-full sm:w-10/12 md:w-6/12 lg:w-4/12">
-                <a href="/login">
+                <a href="http://192.168.1.40/login">
                     <div class="single_services text-center mt-8 mx-3">
                         <div class="services_icon">
                             <i class="lni lni-checkmark-circle"></i>
