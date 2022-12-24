@@ -15,12 +15,14 @@ class EmployeeController extends Controller
 
     public function fetchEmployee()
     {
-        $users = User::get();
+        $users = User::when(!empty($input['username']), function ($q) use ($input) {
+            $q->where('samaccountname', $input['username']);
+        })->get();
 
         $employees = Employee::get();
 
 
-        \App\Models\Employee::where('id','>','0')->update([
+        \App\Models\Employee::where('id', '>', '0')->update([
             'verify' => 'f']);
 
 
@@ -52,12 +54,12 @@ class EmployeeController extends Controller
     public function exportEmployee()
     {
 
-        $employess = Employee::select('comman_name','user_name','email','title','mobile','address','status')->get()->toArray();
+        $employess = Employee::select('comman_name', 'user_name', 'email', 'title', 'mobile', 'address', 'status')->get()->toArray();
 
         $csv = \League\Csv\Writer::createFromFileObject(new SplTempFileObject());
         $csv->insertOne(['Name', 'User Name', 'Email', 'Title', 'Mobile', 'Address', 'Status']);
         $csv->insertAll($employess);
-        $csv->output('DC Users ' .date('d-M-Y'). 'Report.csv');
+        $csv->output('DC Users ' . date('d-M-Y') . 'Report.csv');
         die;
     }
 
