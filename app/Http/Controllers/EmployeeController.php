@@ -15,6 +15,7 @@ class EmployeeController extends Controller
 
     public function fetchEmployee()
     {
+        $input = request()->all();
         $users = User::when(!empty($input['username']), function ($q) use ($input) {
             $q->where('samaccountname', $input['username']);
         })->get();
